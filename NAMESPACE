@@ -1,4 +1,5 @@
-export("readPCParcelaIFN2", "readPCParcelaIFN3", "readPCParcelaIFN4", "readPiesMayoresIFN2", "readPiesMayoresIFN3", "readPiesMayoresIFN4")
+export("readPCParcelaIFN2", "readPCParcelaIFN3", "readPCParcelaIFN4", "readPiesMayoresIFN2",
+       "readPiesMayoresIFN3", "readPiesMayoresIFN4", "readPiesMenoresIFN2")
 export("readMatorral", "readDatosMapIFN3", "readRegenera")
 importFrom("foreign", "read.dbf")
 importFrom("utils", "setTxtProgressBar", "txtProgressBar")
