@@ -102,3 +102,4 @@ extractRegTreeData<-function(regData, height.cm=TRUE, subsetVars=TRUE){
   regTreeData2$REG<-2
   return(rbind(regTreeData1, regTreeData2))
 }
+
