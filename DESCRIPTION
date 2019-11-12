@@ -1,0 +1,17 @@
+Package: IFNread
+Type: Package
+Title: IFN tree dynamics and sylviculture
+Version: 0.1.0
+Date: 2019-11-10
+Authors@R: c(
+	person('Miquel', 'De Caceres', role=c('aut','cre'),
+	email='miquelcaceres@gmail.com'))
+Description: Implements routines for reading data from Spanish Forest Inventory (IFN) plots.
+License: GPL (>= 2)
+Encoding: UTF-8
+Depends: R (>= 2.10)
+Imports: foreign, ggplot2
+Suggests: RODBC, knitr, rmarkdown
+LazyData: true
+RoxygenNote: 6.1.1
+VignetteBuilder: utils, knitr
