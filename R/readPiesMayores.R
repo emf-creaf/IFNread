@@ -262,10 +262,10 @@ readPiesMayoresIFN3<-function(accessFiles, plotTypeIFN3=c("A1","NN"), plotIDs = 
   }
 
   if(subsetVars){
-    vars = c("Provincia","Estadillo","ID","TYPE","Especie","N","DM","Ht","OrdenIf3","OrdenIf2", "Forma")
+    vars = c("Provincia","Estadillo","ID","TYPE","Especie","N","DM","Ht","Rumbo","Distanci","OrdenIf3","OrdenIf2", "Forma")
     if(include.IFN2) vars = c(vars, "Species2", "N2", "DBH2", "Ht2", "Forma2")
     treeDataIFN3 <- treeDataIFN3[,vars]
-    nms <-c("Provincia","Estadillo","ID","Type","Species", "N", "DBH","H", "OIF3", "OIF2", "FC")
+    nms <-c("Provincia","Estadillo","ID","Type","Species", "N", "DBH","H", "Angle", "Dist", "OIF3", "OIF2", "FC")
     if(include.IFN2) nms <- c(nms,"Species2", "N2","DBH2","H2", "FC2")
     names(treeDataIFN3)<-nms
   }
@@ -442,10 +442,10 @@ readPiesMayoresIFN4<-function(accessFiles, plotTypeIFN4=c("A1","NN"),
   #Translate meters to cms
   if(height.cm) treeDataIFN4$Ht = treeDataIFN4$Ht*100 #meters to cms
   if(subsetVars){
-    vars = c("Provincia","Estadillo","ID","TYPE","Especie","N","Dm","Ht","Forma","OrdenIf4","OrdenIf3")
+    vars = c("Provincia","Estadillo","ID","TYPE","Especie","N","Dm","Ht","Rumbo","Distanci","Forma","OrdenIf4","OrdenIf3")
     if(include.IFN3) vars = c(vars, "Species3","N3","DBH3", "Ht3", "Forma3")
     treeDataIFN4 <- treeDataIFN4[,vars]
-    nms <-c("Provincia","Estadillo","ID","Type","Species", "N", "DBH","H", "FC", "OIF4", "OIF3")
+    nms <-c("Provincia","Estadillo","ID","Type","Species", "N", "DBH","H", "Angle", "Dist","FC", "OIF4", "OIF3")
     if(include.IFN3) nms <- c(nms, "Species3", "N3", "DBH3","H3", "FC3")
     names(treeDataIFN4)<-nms
   }
