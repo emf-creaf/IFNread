@@ -65,3 +65,37 @@ readMatorral<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
   shrubData$REG<-0
   return(shrubData)
 }
+
+#' @rdname readMatorral
+readMatorralIFN2<-function(prov, DBFdir = "DBF",
+                           height.cm = TRUE, subsetVars=TRUE){
+  provNum = as.numeric(prov)
+  shrubDataIFN2<-read.dbf(paste(DBFdir,"/",prov[1],"/MATORR",prov[1],".dbf",sep=""))
+  cat(paste(prov[1],".",sep=""))
+  shrubDataIFN2$PROVINCIA = provNum[1]
+  if(length(prov)>1){
+    for(i in 2:length(prov)){
+      td<-read.dbf(paste(DBFdir,"/",prov[i],"/MATORR",prov[i],".dbf",sep=""))
+      cat(paste(prov[i],".",sep=""))
+      td$PROVINCIA = provNum[i]
+      shrubDataIFN2 = merge(shrubDataIFN2, td, all=TRUE, sort=FALSE)
+    }
+  }
+  shrubDataIFN2$ESPECIE = as.numeric(as.character(shrubDataIFN2$ESPECIE))
+  shrubDataIFN2$ID<-shrubDataIFN2$PROVINCIA*10000+as.numeric(as.character(shrubDataIFN2$ESTADILLO))
+  shrubDataIFN2$ALTUMED = sub(",",".",as.character(shrubDataIFN2$ALTUMED))
+  shrubDataIFN2$ALTUMED[shrubDataIFN2$ALTUMED=="NA"]<-NA
+  shrubDataIFN2$ALTUMED <- as.numeric(shrubDataIFN2$ALTUMED)
+  ### SPECIFY SELECTION CRITERIA #####
+  #Translate meters to cms
+  if(height.cm) shrubDataIFN2$ALTUMED = shrubDataIFN2$ALTUMED*10 #dm to cms
+  if(subsetVars){
+    n = names(shrubDataIFN2)
+    shrubDataIFN2 <- shrubDataIFN2[,c(which(n=="PROVINCIA"),which(n=="ESTADILLO"),which(n=="ID"),
+                                      which(n=="ESPECIE"),which(n=="FRACCAB"), which(n=="ALTUMED"))]
+    names(shrubDataIFN2)<-c("Provincia", "Estadillo","ID","Especie","FCC", "Ht")
+  }
+  shrubDataIFN2$REG<-0
+  return(shrubDataIFN2)
+}
+

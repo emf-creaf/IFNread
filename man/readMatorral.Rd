@@ -2,10 +2,14 @@
 % Please edit documentation in R/readMatorral.R
 \name{readMatorral}
 \alias{readMatorral}
+\alias{readMatorralIFN2}
 \title{Read shrub data}
 \usage{
 readMatorral(accessFiles, provincias = NULL, plotType = c("A1", "NN"),
   plotIDs = NULL, rem.nospecies = FALSE, height.cm = TRUE,
+  subsetVars = TRUE)
+
+readMatorralIFN2(prov, DBFdir = "DBF", height.cm = TRUE,
   subsetVars = TRUE)
 }
 \arguments{
