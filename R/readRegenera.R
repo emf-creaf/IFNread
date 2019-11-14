@@ -58,8 +58,12 @@ readRegenera<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
   if(rem.nospecies) regData<-regData[!is.na(regData$Especie),]
   if(subsetVars){
     n = names(regData)
-    regData <- regData[,c(which(n=="ID"),which(n=="Especie"),which(n=="CatDes"), which(n=="Densidad"),
+    regData <- regData[,c(which(n=="Provincia"),which(n=="Estadillo"),which(n=="ID"),which(n=="TYPE"),
+                          which(n=="Especie"),which(n=="CatDes"), which(n=="Densidad"),
                                   which(n=="NumPies"), which(n=="Hm"))]
+    nms <-c("Provincia","Estadillo","ID","Type","Species", "CatDes", "Density", "NumStems", "H")
+    names(regData)<-nms
+
   }
   return(regData)
 }
