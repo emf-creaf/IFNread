@@ -60,7 +60,7 @@ readMatorral<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
     n = names(shrubData)
     shrubData <- shrubData[,c(which(n=="ID"),which(n=="Especie"),
                                       which(n=="Fcc"), which(n=="Hm"))]
-    names(shrubData)<-c("ID","Especie","FCC", "Ht")
+    names(shrubData)<-c("ID","Species","FCC", "H")
   }
   shrubData$REG<-0
   return(shrubData)
@@ -93,7 +93,7 @@ readMatorralIFN2<-function(prov, DBFdir = "DBF",
     n = names(shrubDataIFN2)
     shrubDataIFN2 <- shrubDataIFN2[,c(which(n=="PROVINCIA"),which(n=="ESTADILLO"),which(n=="ID"),
                                       which(n=="ESPECIE"),which(n=="FRACCAB"), which(n=="ALTUMED"))]
-    names(shrubDataIFN2)<-c("Provincia", "Estadillo","ID","Especie","FCC", "Ht")
+    names(shrubDataIFN2)<-c("Provincia", "Estadillo","ID","Species","FCC", "H")
   }
   shrubDataIFN2$REG<-0
   return(shrubDataIFN2)
