@@ -13,7 +13,7 @@
 #' @return a data frame with shrub data
 #'
 readMatorral<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
-                       plotIDs = NULL, rem.nospecies=FALSE, height.cm = TRUE,
+                       plotIDs = NULL, rem.nospecies=FALSE, height.cm = FALSE,
                        subsetVars=TRUE){
   cat(paste("Reading",accessFiles[1],"...\n"))
   ch<-RODBC::odbcConnectAccess2007(accessFiles[1])
@@ -56,6 +56,7 @@ readMatorral<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
 
   #Translate meters to cms
   if(height.cm) shrubData$Hm = as.numeric(as.character(shrubData$Hm))*10 #dm to cms
+  else shrubData$Hm = as.numeric(as.character(shrubData$Hm))/10 #dm to m
   if(subsetVars){
     n = names(shrubData)
     shrubData <- shrubData[,c(which(n=="ID"),which(n=="Especie"),
@@ -68,7 +69,7 @@ readMatorral<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
 
 #' @rdname readMatorral
 readMatorralIFN2<-function(prov, DBFdir = "DBF",
-                           height.cm = TRUE, subsetVars=TRUE){
+                           height.cm = FALSE, subsetVars=TRUE){
   provNum = as.numeric(prov)
   shrubDataIFN2<-read.dbf(paste(DBFdir,"/",prov[1],"/MATORR",prov[1],".dbf",sep=""))
   cat(paste(prov[1],".",sep=""))
@@ -89,6 +90,7 @@ readMatorralIFN2<-function(prov, DBFdir = "DBF",
   ### SPECIFY SELECTION CRITERIA #####
   #Translate meters to cms
   if(height.cm) shrubDataIFN2$ALTUMED = shrubDataIFN2$ALTUMED*10 #dm to cms
+  else shrubDataIFN2$ALTUMED = as.numeric(as.character(shrubDataIFN2$ALTUMED))/10 #dm to m
   if(subsetVars){
     n = names(shrubDataIFN2)
     shrubDataIFN2 <- shrubDataIFN2[,c(which(n=="PROVINCIA"),which(n=="ESTADILLO"),which(n=="ID"),

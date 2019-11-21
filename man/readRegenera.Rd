@@ -8,7 +8,7 @@
 readRegenera(accessFiles, provincias = NULL, plotType = c("A1", "NN"),
   plotIDs = NULL, rem.nospecies = FALSE, subsetVars = TRUE)
 
-extractRegTreeData(regData, height.cm = TRUE, subsetVars = TRUE)
+extractRegTreeData(regData, height.cm = FALSE, subsetVars = TRUE)
 }
 \arguments{
 \item{accessFiles}{A character vector of access files to be read.}

@@ -6,10 +6,10 @@
 \title{Read shrub data}
 \usage{
 readMatorral(accessFiles, provincias = NULL, plotType = c("A1", "NN"),
-  plotIDs = NULL, rem.nospecies = FALSE, height.cm = TRUE,
+  plotIDs = NULL, rem.nospecies = FALSE, height.cm = FALSE,
   subsetVars = TRUE)
 
-readMatorralIFN2(prov, DBFdir = "DBF", height.cm = TRUE,
+readMatorralIFN2(prov, DBFdir = "DBF", height.cm = FALSE,
   subsetVars = TRUE)
 }
 \arguments{

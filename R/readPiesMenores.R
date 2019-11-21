@@ -30,7 +30,7 @@ readPiesMenoresIFN2<-function(prov, DBFdir = "DBF",subsetVars=TRUE){
   #Remove records with no height and number of individuals
   regTreeDataIFN2<-regTreeDataIFN2[!is.na(regTreeDataIFN2$NUMERO),]
   regTreeDataIFN2<-regTreeDataIFN2[!regTreeDataIFN2$NUMERO==0,]
-  regTreeDataIFN2$ALTUMED = as.numeric(as.character(regTreeDataIFN2$ALTUMED))*10  #dm to cms
+  regTreeDataIFN2$ALTUMED = as.numeric(as.character(regTreeDataIFN2$ALTUMED))/10  #dm to m
   regTreeDataIFN2<-regTreeDataIFN2[!is.na(regTreeDataIFN2$ALTUMED),]
   ### SPECIFY SELECTION CRITERIA #####
   if(subsetVars){
