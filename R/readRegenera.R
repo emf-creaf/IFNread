@@ -79,11 +79,11 @@ extractRegTreeData<-function(regData, height.cm=TRUE, subsetVars=TRUE){
   #Separa Pies menores (REG=1)
   regTreeData1<-regData[sel4,]
   regTreeData1$DG = 5
-  regTreeData1$NumPies<-as.numeric(as.character(regTreeData1$NumPies))*127.3239546
+  regTreeData1$NumStems<-as.numeric(as.character(regTreeData1$NumStems))*127.3239546
   if(height.cm) regTreeData1$Hm = regTreeData1$Hm*10 #Translate from dm to cm
   if(subsetVars){
     n = names(regTreeData1)
-    regTreeData1 <- regTreeData1[,c(which(n=="ID"),which(n=="Especie"),which(n=="NumPies"), which(n=="DG"),
+    regTreeData1 <- regTreeData1[,c(which(n=="ID"),which(n=="Especie"),which(n=="NumStems"), which(n=="DG"),
                                           which(n=="Hm"))]
     names(regTreeData1)<-c("ID","Especie","N","DG","Ht")
   }

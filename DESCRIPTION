@@ -1,12 +1,12 @@
 Package: IFNread
 Type: Package
-Title: IFN tree dynamics and sylviculture
-Version: 0.1.0
-Date: 2019-11-10
+Title: Read IFN Data 
+Version: 0.1.2
+Date: 2020-10-11
 Authors@R: c(
 	person('Miquel', 'De Caceres', role=c('aut','cre'),
 	email='miquelcaceres@gmail.com'))
-Description: Implements routines for reading data from Spanish Forest Inventory (IFN) plots.
+Description: Implements routines for reading plot data from Spanish Forest Inventory (IFN) data bases.
 License: GPL (>= 2)
 Encoding: UTF-8
 Depends: R (>= 2.10)
