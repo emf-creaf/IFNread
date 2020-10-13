@@ -5,8 +5,14 @@
 \alias{extractRegTreeData}
 \title{Read regeneration data}
 \usage{
-readRegenera(accessFiles, provincias = NULL, plotType = c("A1", "NN"),
-  plotIDs = NULL, rem.nospecies = FALSE, subsetVars = TRUE)
+readRegenera(
+  accessFiles,
+  provincias = NULL,
+  plotType = c("A1", "NN"),
+  plotIDs = NULL,
+  rem.nospecies = FALSE,
+  subsetVars = TRUE
+)
 
 extractRegTreeData(regData, height.cm = FALSE, subsetVars = TRUE)
 }

@@ -8,22 +8,45 @@
 \alias{readPiesMenoresIFN2}
 \title{Reads the table of pies mayores}
 \usage{
-readPiesMayoresIFN2(prov, DBFdir = "DBF", plotIDs = NULL,
-  rem.nodensity = FALSE, rem.nospecies = FALSE, rem.noheight = FALSE,
-  height.cm = FALSE, subsetVars = TRUE)
+readPiesMayoresIFN2(
+  prov,
+  DBFdir = "DBF",
+  plotIDs = NULL,
+  rem.nodensity = FALSE,
+  rem.nospecies = FALSE,
+  rem.noheight = FALSE,
+  height.cm = FALSE,
+  subsetVars = TRUE
+)
 
-readPiesMayoresIFN3(accessFiles, plotTypeIFN3 = c("A1", "NN"),
-  plotIDs = NULL, include.IFN2 = FALSE, rem.nospecies = FALSE,
-  rem.noheight = FALSE, rem.nodensity = FALSE,
-  rem.codes32 = character(0), rem.codes33 = character(0),
-  height.cm = FALSE, subsetVars = TRUE)
+readPiesMayoresIFN3(
+  accessFiles,
+  plotTypeIFN3 = c("A1", "NN"),
+  plotIDs = NULL,
+  include.IFN2 = FALSE,
+  rem.nospecies = FALSE,
+  rem.noheight = FALSE,
+  rem.nodensity = FALSE,
+  rem.codes32 = character(0),
+  rem.codes33 = character(0),
+  height.cm = FALSE,
+  subsetVars = TRUE
+)
 
-readPiesMayoresIFN4(accessFiles, plotTypeIFN4 = c("A1", "NN"),
-  plotIDs = NULL, include.IFN3 = FALSE, rem.nospecies = FALSE,
-  rem.noheight = FALSE, rem.nodensity = FALSE,
-  rem.codes43 = character(0), rem.codes44 = character(0),
-  height.cm = FALSE, subsetVars = TRUE, vars.IFN3 = c("OrdenIf3",
-  "Especie", "Dn1", "Dn2", "Ht", "Forma"))
+readPiesMayoresIFN4(
+  accessFiles,
+  plotTypeIFN4 = c("A1", "NN"),
+  plotIDs = NULL,
+  include.IFN3 = FALSE,
+  rem.nospecies = FALSE,
+  rem.noheight = FALSE,
+  rem.nodensity = FALSE,
+  rem.codes43 = character(0),
+  rem.codes44 = character(0),
+  height.cm = FALSE,
+  subsetVars = TRUE,
+  vars.IFN3 = c("OrdenIf3", "Especie", "Dn1", "Dn2", "Ht", "Forma")
+)
 
 readPiesMenoresIFN2(prov, DBFdir = "DBF", subsetVars = TRUE)
 }
@@ -118,12 +141,6 @@ muestreada en el IFN2 e incorporaci?n de una nueva masa forestal). Se utilizar?n
 }}
 
 \item{vars.IFN3}{String vector with column names of variables in the IFN3 table}
-
-\item{prov}{Character vector with codes of provinces (e.g. \code{c("01","03")}) or \code{"all"} for all provinces.}
-
-\item{DBFdir}{String with the path where provinces are stored}
-
-\item{subsetVars}{Flag to filter data columns}
 }
 \value{
 a data frame

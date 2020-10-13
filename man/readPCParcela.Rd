@@ -9,11 +9,14 @@
 \usage{
 readPCParcelaIFN2(prov, DBFdir = "DBF", plotIDs = NULL)
 
-readPCParcelaIFN3(prov, DBFdir = "DBF", plotTypeIFN3 = c("A1", "NN"),
-  plotIDs = NULL)
+readPCParcelaIFN3(
+  prov,
+  DBFdir = "DBF",
+  plotTypeIFN3 = c("A1", "NN"),
+  plotIDs = NULL
+)
 
-readPCParcelaIFN4(accessFiles, plotTypeIFN4 = c("A1", "N"),
-  plotIDs = NULL)
+readPCParcelaIFN4(accessFiles, plotTypeIFN4 = c("A1", "N"), plotIDs = NULL)
 }
 \arguments{
 \item{prov}{Character vector with codes of provinces (e.g. \code{c("01","03")}) or \code{"all"} for all provinces.}
