@@ -31,6 +31,10 @@ readMatorralIFN2(prov, DBFdir = "DBF", height.cm = FALSE, subsetVars = TRUE)
 \item{height.cm}{Flag to return height in 'cm' instead of 'meters'}
 
 \item{subsetVars}{Flag to filter data columns}
+
+\item{prov}{An integer or character with the province corresponding to the DBF}
+
+\item{DBFdir}{A string indicating the directory where DBFs are located}
 }
 \value{
 a data frame with shrub data

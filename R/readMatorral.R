@@ -69,6 +69,8 @@ readMatorral<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
 }
 
 #' @rdname readMatorral
+#' @param prov An integer or character with the province corresponding to the DBF
+#' @param DBFdir A string indicating the directory where DBFs are located
 readMatorralIFN2<-function(prov, DBFdir = "DBF",
                            height.cm = FALSE, subsetVars=TRUE){
   provNum = as.numeric(prov)
