@@ -37,7 +37,7 @@ readMatorral<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
   shrubData$TYPE  = pdtype
 
 
-  if(!is.null(provincias)) shrubData$ID<-as.character(as.numeric(as.character(shrubData$Provincia))*10000+as.numeric(as.character(shrubData$Estadillo)))
+  if("Provincia" %in% names(shrubData)) shrubData$ID<-as.character(as.numeric(as.character(shrubData$Provincia))*10000+as.numeric(as.character(shrubData$Estadillo)))
   else {
     shrubData$ID<-as.character(as.numeric(as.character(shrubData$Estadillo)))
     nc = nchar(as.character(shrubData$Estadillo))
@@ -59,9 +59,10 @@ readMatorral<-function(accessFiles, provincias = NULL, plotType=c("A1","NN"),
   else shrubData$Hm = as.numeric(as.character(shrubData$Hm))/10 #dm to m
   if(subsetVars){
     n = names(shrubData)
-    shrubData <- shrubData[,c(which(n=="ID"),which(n=="Especie"),
-                                      which(n=="Fcc"), which(n=="Hm"))]
-    names(shrubData)<-c("ID","Species","FCC", "H")
+    shrubData <- shrubData[,c(which(n=="Provincia"),which(n=="Estadillo"),
+                              which(n=="ID"),which(n=="Especie"),
+                              which(n=="Fcc"), which(n=="Hm"))]
+    names(shrubData)<-c("Provincia", "Estadillo","ID","Species","FCC", "H")
   }
   shrubData$REG<-0
   return(shrubData)
