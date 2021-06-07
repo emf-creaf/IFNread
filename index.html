@@ -59,10 +59,33 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="ifnread" class="section level1">
+<div id="ifnread---reading-ifn-source-files" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ifnread" class="anchor"></a>IFNread</h1></div>
-<p>Functions to read IFN</p>
+<a href="#ifnread---reading-ifn-source-files" class="anchor"></a>IFNread - Reading IFN source files</h1></div>
+<!-- badges: start -->
+
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>Package <strong>IFNread</strong> is designed to assist reading source files of the Spanish National Forest Inventory (‘Inventario Forestal Nacional’ or ‘IFN’).</p>
+</div>
+<div id="package-installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-installation" class="anchor"></a>Package installation</h2>
+<p>The latest stable versions GitHub as follows (required package <code>devtools</code> should be installed/updated first):</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"emf-creaf/IFNread"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>Second, third and fourth inventories (i.e. IFN2, IFN3 and IFN4) are supported. Functions are defined to read from:</p>
+<ul>
+<li>Database files (.DBF) in the case of IFN2</li>
+<li>Access files (.mdb) in the case of IFN3 and IFN4</li>
+</ul>
+<p>The package is still under development and it is expected that functions fail in many cases.</p>
+</div>
 </div>
   </div>
 
@@ -80,7 +103,13 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/emf-creaf/IFNread/actions"><img src="https://github.com/emf-creaf/IFNread/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
