@@ -10,21 +10,15 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/extractRegTreeData.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/readDatosMap.html</loc>
+    <loc>/reference/readIFN2.html</loc>
   </url>
   <url>
-    <loc>/reference/readMatorral.html</loc>
-  </url>
-  <url>
-    <loc>/reference/readPCParcela.html</loc>
-  </url>
-  <url>
-    <loc>/reference/readPiesMayores.html</loc>
-  </url>
-  <url>
-    <loc>/reference/readRegenera.html</loc>
+    <loc>/reference/readIFN3IFN4.html</loc>
   </url>
 </urlset>
