@@ -116,7 +116,7 @@ readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
       m <- sapply(s, function(x) {ifelse(length(x)>=2, x[[2]], NA)})
       y <- sapply(s, function(x) {ifelse(length(x)>=3, x[[3]], NA)})
       y[(!is.na(y)) & (nchar(y)==2)] <- paste0("19", y[(!is.na(y)) & (nchar(y)==2)])
-      dateString = paste0(y,"/", m, "/",d)
+      dateString <- paste0(y,"/", m, "/",d)
       dateString[is.na(y)] = NA
       tryCatch(date <- as.POSIXct(dateString))
     }
@@ -157,7 +157,7 @@ readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     if(!is.null(plotType)) {
       sc <- pd$Subclase
       sc[is.na(sc)]<-""
-      pdtype = paste(pd$Cla,sc, sep="")
+      pdtype <- paste(pd$Cla,sc, sep="")
       sel <- pdtype %in% plotType
       pd <- pd[sel,,drop = FALSE]
     }
