@@ -10,7 +10,7 @@ Description: Implements routines for reading plot data from Spanish Forest Inven
 License: GPL (>= 2)
 Encoding: UTF-8
 Depends: R (>= 2.10)
-Imports: foreign, ggplot2
+Imports: foreign, ggplot2, tibble, dplyr
 Suggests: RODBC, knitr, rmarkdown
 LazyData: true
 RoxygenNote: 7.1.1

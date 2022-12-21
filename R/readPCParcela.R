@@ -29,79 +29,146 @@ readPCParcelaIFN2<-function(prov, DBFdir = "DBF", plotIDs = NULL){
 
 #' @rdname readPCParcela
 #'
-#' @param plotTypeIFN3 Subset of plot types to include (see \code{\link{readPiesMayoresIFN3}})
+#' @param source_path Path to the location of BBDD-Campo
+#' @param ifn Either 3 or 4 (for IFN3 or IFN4, respectively)
+#' @param prov Character vector with province codes (e.g. c("03", "14", "25"))
+#' @param ccaa Character vector with names of autonomous communities (e.g. "Catal)
+#' @param plotType Subset of plot types to include (see \code{\link{readPiesMayoresIFN3}})
 #'
-readPCParcelaIFN3<-function(prov, DBFdir = "DBF", plotTypeIFN3=c("A1","NN"), plotIDs = NULL){
-  if(prov=="all") prov = .getSpainProv()
-  cat(paste(prov[1],".",sep=""))
-  pd<-read.dbf(paste(DBFdir,"/",prov[1],"/PCPARC",prov[1],".dbf",sep=""),as.is=TRUE)
-  pd$FECHAPH<-as.Date(pd$FECHAINI, format="%d/%m/%y")
-  pd$FECHAINI<-as.Date(pd$FECHAINI, format="%d/%m/%y")
-  pd$FECHAFIN<-as.Date(pd$FECHAFIN, format="%d/%m/%y")
-  pd$HORAPH <-as.character(pd$HORAPH)
-  pd$HORAINI <-as.character(pd$HORAINI)
-  pd$HORAFIN<-as.character(pd$HORAFIN)
-  if(length(prov)>1) {
-    for(i in 2:length(prov)) {
-      cat(paste(prov[i],".",sep=""))
-      pdi<-read.dbf(paste(DBFdir,"/",prov[i],"/PCPARC",prov[i],".dbf",sep=""),as.is=TRUE)
-      pdi$FECHAPH<-as.Date(pdi$FECHAINI, format="%d/%m/%y")
-      pdi$FECHAINI<-as.Date(pdi$FECHAINI, format="%d/%m/%y")
-      pdi$FECHAFIN<-as.Date(pdi$FECHAFIN, format="%d/%m/%y")
-      pdi$HORAPH <-as.character(pdi$HORAPH)
-      pdi$HORAINI <-as.character(pdi$HORAINI)
-      pdi$HORAFIN<-as.character(pdi$HORAFIN)
-      pd<-merge(pd,pdi, all=TRUE, sort=FALSE)
+readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
+                        plotType = NULL){
+  colClasses3 <- c("Provincia" = "character",
+                   "Estadillo" = "character",
+                   "Cla" = "character",
+                   "Subclase" = "character",
+                   "Tipo" = "character",
+                   "Vuelo1" = "character",
+                   "Vuelo2" = "character",
+                   "MejVue1" = "character",
+                   "MejVue2" = "character",
+                   "MejSue1" = "character",
+                   "MejSue2" = "character",
+                   "Acceso" = "character",
+                   "CortaReg" = "character",
+                   "DistFoto" = "character",
+                   "Pasada1" = "character",
+                   "Pasada2" = "character",
+                   "Foto1" = "character",
+                   "Foto2" = "character",
+                   "Nivel1" = "character",
+                   "Nivel2" = "character",
+                   "Nivel3" = "character",
+                   "Resid" = "character",
+                   "RumboF1" = "character",
+                   "RumboF2" = "character",
+                   "HoraPh" = "character",
+                   "HoraIni" = "character",
+                   "HoraFin" = "character",
+                   "Estado" = "character",
+                   "Ano" = "character",
+                   "INE" = "character",
+                   "Rocosid" = "character",
+                   "DisEsp" = "character")
+
+  colClasses4 <- c("Provincia" = "character",
+                   "Estadillo" = "character",
+                   "Cla" = "character",
+                   "Subclase" = "character",
+                   "Tipo" = "character",
+                   "Vuelo1" = "character",
+                   "Vuelo2" = "character",
+                   "MejVue1" = "character",
+                   "MejVue2" = "character",
+                   "MejSue1" = "character",
+                   "MejSue2" = "character",
+                   "Acceso" = "character",
+                   "CortaReg" = "character",
+                   "DistFoto" = "character",
+                   "Pasada1" = "character",
+                   "Pasada2" = "character",
+                   "Foto1" = "character",
+                   "Foto2" = "character",
+                   "Nivel1" = "character",
+                   "Nivel2" = "character",
+                   "Nivel3" = "character",
+                   "RumboF1" = "character",
+                   "RumboF2" = "character",
+                   "HoraPh" = "character",
+                   "HoraIni" = "character",
+                   "HoraFin" = "character",
+                   "Estado" = "character",
+                   "Ano" = "character",
+                   "INE" = "character",
+                   "Rocosid" = "character",
+                   "DisEsp" = "character")
+  colClasses <- ifelse(ifn==3, colClasses3, colClasses4)
+  f_date<- function(dateString) {
+    date <- NULL
+    try(date <- as.POSIXct(dateString), silent = TRUE)
+    if(is.null(date)) {
+      s <- strsplit(dateString, " ")
+      dateString <- sapply(s, function(x) x[1])
+      try(date <- as.POSIXct(dateString), silent = TRUE)
+    }
+    if(is.null(date)) {
+      s <- strsplit(dateString, "/")
+      d <- sapply(s, function(x) x[1])
+      m <- sapply(s, function(x) {ifelse(length(x)>=2, x[[2]], NA)})
+      y <- sapply(s, function(x) {ifelse(length(x)>=3, x[[3]], NA)})
+      y[(!is.na(y)) & (nchar(y)==2)] <- paste0("19", y[(!is.na(y)) & (nchar(y)==2)])
+      dateString = paste0(y,"/", m, "/",d)
+      dateString[is.na(y)] = NA
+      tryCatch(date <- as.POSIXct(dateString))
+    }
+    return(date)
+  }
+
+  filenames <- character(0)
+  if(!is.null(prov)) {
+    for(i in 1:length(prov)){
+      fn <- file.path(source_path,paste0("Ifn",ifn, "p", prov[i]),"PCParcelas.csv")
+      if(!file.exists(fn)) stop("File not found: '", fn,"'")
+      filenames <- c(filenames, fn)
     }
   }
-  pd$ID<-as.character(as.numeric(as.character(pd$PROVINCIA))*10000+as.numeric(as.character(pd$ESTADILLO)))
-
-  #Selection
-  sc = pd$SUBCLASE
-  sc[is.na(sc)]<-""
-  pdtype = paste(pd$CLA,sc, sep="")
-  sel = pdtype %in% plotTypeIFN3
-  if(!is.null(plotIDs)) sel = sel | (pd$ID %in% as.character(plotIDs))
-  pd <-pd[sel,]
-  if(length(pd$ID)==length(unique(pd$ID))) rownames(pd)<-pd$ID
-  return(pd)
-}
-
-#' @rdname readPCParcela
-#' @param accessFiles A character vector of access files to be read.
-#' @param plotTypeIFN4 Subset of plot types to include (see \code{\link{readPiesMayoresIFN3}})
-#'
-readPCParcelaIFN4<-function(accessFiles, plotTypeIFN4=c("A1","N"), plotIDs = NULL){
-  cat(".")
-  ch<-RODBC::odbcConnectAccess2007(accessFiles[1])
-  pd<-RODBC::sqlFetch(ch, "PCParcelas")
-  close(ch)
-  # pd$FechaIni<-as.Date(pd$FechaIni)
-  # pd$FechaFin<-as.Date(pd$FechaFin)
-  if(length(accessFiles)>1) {
-    for(i in 2:length(accessFiles)) {
-      cat(".")
-      chi<-RODBC::odbcConnectAccess2007(accessFiles[i])
-      pdi<-RODBC::sqlFetch(chi, "PCParcelas")
-      close(chi)
-      pd<-merge(pd,pdi, all=TRUE, sort=FALSE)
+  if(!is.null(ccaa)) {
+    for(i in 1:length(ccaa)){
+      fn <- file.path(source_path,paste0("Ifn",ifn, "_", ccaa[i]),"PCParcelas.csv")
+      if(!file.exists(fn)) stop("File not found: '", fn,"'")
+      filenames <- c(filenames, fn)
     }
   }
-  #subset Estadillo if necessary
-  nc = nchar(as.character(pd$Estadillo))
-  pd$Estadillo = substr(as.character(pd$Estadillo),nc-3,nc)
-  #Determine ID
-  pd$ID<-as.character(as.numeric(as.character(pd$Provincia))*10000+as.numeric(as.character(pd$Estadillo)))
+  df_list <- vector("list", length(filenames))
+  for(i in 1:length(filenames)) {
+    fn <- filenames[i]
+    pd <- read.csv(fn, sep = "\t", dec = ".",
+                   colClasses = colClasses,
+                   na.strings = "")
+    if("FechaPh" %in% names(pd)) pd$FechaPh<-f_date(pd$FechaPh)
+    if("FechaIni" %in% names(pd)) pd$FechaIni<-f_date(pd$FechaIni)
+    if("FechaFin" %in% names(pd)) pd$FechaFin<-f_date(pd$FechaFin)
 
-  #Selection
-  sc = as.character(pd$Subclase)
-  sc[is.na(sc)]<-""
-  pdtype = paste(pd$Cla,sc, sep="")
-  sel = pdtype %in% plotTypeIFN4
-  if(!is.null(plotIDs)) sel = sel | (pd$ID %in% as.character(plotIDs))
+    pd$Provincia[nchar(pd$Provincia)==1] <- paste0("0", pd$Provincia[nchar(pd$Provincia)==1])
+    names(pd)[names(pd)=="Coory"]  <- "CoorY"
+    if("CoorX" %in% names(pd)) pd$CoorX  <- as.numeric(pd$CoorX)
+    if("CoorY" %in% names(pd)) pd$CoorY  <- as.numeric(pd$CoorY)
 
-  pd <-pd[sel,]
-  if(length(pd$ID)==length(unique(pd$ID))) rownames(pd)<-pd$ID
-  return(pd)
+    # Plot selection
+    if(!is.null(plotType)) {
+      sc <- pd$Subclase
+      sc[is.na(sc)]<-""
+      pdtype = paste(pd$Cla,sc, sep="")
+      sel <- pdtype %in% plotType
+      pd <- pd[sel,,drop = FALSE]
+    }
+
+    # Add ID and order variables
+    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Cla, pd$Subclase)
+    vars <- c("Provincia", "Estadillo", "Cla", "Subclase", "ID")
+    pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
+    df_list[[i]]<- as_tibble(pd)
+  }
+  return(bind_rows(df_list))
 }
+
 
