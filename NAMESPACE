@@ -4,7 +4,6 @@ export("readPCParcelaIFN2", "readPCParcela",
 export("extractRegTreeData")
 export("readMatorral", "readMatorralIFN2", "readDatosMap", "readRegenera")
 importFrom("foreign", "read.dbf")
-importFrom("utils", "setTxtProgressBar", "txtProgressBar")
 importFrom("tibble", "as_tibble")
 importFrom("dplyr", "bind_rows")
-
+importFrom("utils", "read.csv")

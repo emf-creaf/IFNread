@@ -14,10 +14,10 @@ Spanish National Forest Inventory (‘Inventario Forestal Nacional’ or
 ## Package installation
 
 The latest stable versions GitHub as follows (required package
-`devtools` should be installed/updated first):
+\`remotes\`\` should be installed/updated first):
 
 ``` r
-devtools::install_github("emf-creaf/IFNread")
+remotes::install_github("emf-creaf/IFNread")
 ```
 
 ## Usage
@@ -25,8 +25,8 @@ devtools::install_github("emf-creaf/IFNread")
 Second, third and fourth inventories (i.e. IFN2, IFN3 and IFN4) are
 supported. Functions are defined to read from:
 
--   Database files (.DBF) in the case of IFN2
--   Access files (.mdb) in the case of IFN3 and IFN4
+- Database files (.DBF) in the case of IFN2
+- Comma-separated files (.csv) in the case of IFN3 and IFN4
 
 The package is still under development and it is expected that functions
 fail in many cases.
