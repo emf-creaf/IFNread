@@ -13,22 +13,18 @@
 #' @return a data frame
 #' @name readIFN2
 readPiesMenoresIFN2<-function(prov, DBFdir = "DBF",subsetVars=TRUE){
-  provNum = as.numeric(prov)
-  regTreeDataIFN2<-read.dbf(paste(DBFdir,"/",prov[1],"/PIESME",prov[1],".DBF",sep=""))
-  cat(paste(prov[1],".",sep=""))
-  regTreeDataIFN2$PROVINCIA = provNum[1]
-  if(length(prov)>1){
-    for(i in 2:length(prov)){
-      td<-read.dbf(paste(DBFdir,"/",prov[i],"/PIESME",prov[i],".DBF",sep=""))
-      cat(paste(prov[i],".",sep=""))
-      td$PROVINCIA = provNum[i]
-      regTreeDataIFN2 = merge(regTreeDataIFN2, td, all=TRUE, sort=FALSE)
-    }
+  df_list <- vector("list", length(prov))
+  for(i in 1:length(prov)){
+    td<-read.dbf(paste(DBFdir,"/",prov[i],"/PIESME",prov[i],".DBF",sep=""))
+    td$PROVINCIA = prov[i]
+    df_list <- as_tibble(td)
   }
+  regTreeDataIFN2<-bind_rows(df_list)
+
   factor<-c(127.3239546, 31.83098865,14.14710607, 5.092958185)
-  regTreeDataIFN2$ID<-regTreeDataIFN2$PROVINCIA*10000+as.numeric(as.character(regTreeDataIFN2$ESTADILLO))
+  regTreeDataIFN2$ID<-as.character(as.numeric(regTreeDataIFN2$PROVINCIA)*10000+as.numeric(regTreeDataIFN2$ESTADILLO))
   regTreeDataIFN2$NUMERO<-as.numeric(as.character(regTreeDataIFN2$NUMERO))*factor[1]
-  regTreeDataIFN2$ESPECIE<-as.numeric(as.character(regTreeDataIFN2$ESPECIE))
+  regTreeDataIFN2$ESPECIE<-as.character(regTreeDataIFN2$ESPECIE)
   regTreeDataIFN2$DG = 5
   #Remove records with no height and number of individuals
   regTreeDataIFN2<-regTreeDataIFN2[!is.na(regTreeDataIFN2$NUMERO),]
@@ -42,30 +38,26 @@ readPiesMenoresIFN2<-function(prov, DBFdir = "DBF",subsetVars=TRUE){
                                           which(n=="NUMERO"), which(n=="DG"), which(n=="ALTUMED"))]
     names(regTreeDataIFN2) <- c("Provincia", "Estadillo", "ID","Species","N","DBH","H")
   }
-  regTreeDataIFN2$OIF2<-"-1"
   return(regTreeDataIFN2)
 }
 
 #' @rdname readIFN2
 readMatorralIFN2<-function(prov, DBFdir = "DBF",
                            height.cm = FALSE, subsetVars=TRUE){
-  provNum = as.numeric(prov)
-  shrubDataIFN2<-read.dbf(paste(DBFdir,"/",prov[1],"/MATORR",prov[1],".DBF",sep=""))
-  cat(paste(prov[1],".",sep=""))
-  shrubDataIFN2$PROVINCIA = provNum[1]
-  if(length(prov)>1){
-    for(i in 2:length(prov)){
-      td<-read.dbf(paste(DBFdir,"/",prov[i],"/MATORR",prov[i],".DBF",sep=""))
-      cat(paste(prov[i],".",sep=""))
-      td$PROVINCIA = provNum[i]
-      shrubDataIFN2 = merge(shrubDataIFN2, td, all=TRUE, sort=FALSE)
-    }
+  df_list <- vector("list", length(prov))
+  for(i in 1:length(prov)){
+    td<-read.dbf(paste(DBFdir,"/",prov[i],"/MATORR",prov[i],".DBF",sep=""))
+    td$PROVINCIA = prov[i]
+    df_list[[i]] <- as_tibble(td)
   }
-  shrubDataIFN2$ESPECIE = as.numeric(as.character(shrubDataIFN2$ESPECIE))
-  shrubDataIFN2$ID<-shrubDataIFN2$PROVINCIA*10000+as.numeric(as.character(shrubDataIFN2$ESTADILLO))
+  shrubDataIFN2<-bind_rows(df_list)
+
+  shrubDataIFN2$ID<-as.character(as.numeric(shrubDataIFN2$PROVINCIA)*10000+as.numeric(shrubDataIFN2$ESTADILLO))
+  shrubDataIFN2$ESPECIE = as.character(shrubDataIFN2$ESPECIE)
   shrubDataIFN2$ALTUMED = sub(",",".",as.character(shrubDataIFN2$ALTUMED))
   shrubDataIFN2$ALTUMED[shrubDataIFN2$ALTUMED=="NA"]<-NA
   shrubDataIFN2$ALTUMED <- as.numeric(shrubDataIFN2$ALTUMED)
+
   ### SPECIFY SELECTION CRITERIA #####
   #Translate meters to cms
   if(height.cm) shrubDataIFN2$ALTUMED = shrubDataIFN2$ALTUMED*10 #dm to cms
@@ -76,7 +68,6 @@ readMatorralIFN2<-function(prov, DBFdir = "DBF",
                                       which(n=="ESPECIE"),which(n=="FRACCAB"), which(n=="ALTUMED"))]
     names(shrubDataIFN2)<-c("Provincia", "Estadillo","ID","Species","FCC", "H")
   }
-  shrubDataIFN2$REG<-0
   return(shrubDataIFN2)
 }
 
@@ -84,22 +75,19 @@ readMatorralIFN2<-function(prov, DBFdir = "DBF",
 readPiesMayoresIFN2<-function(prov, DBFdir = "DBF", plotIDs = NULL,
                               rem.nodensity=FALSE, rem.nospecies=FALSE, rem.noheight=FALSE,
                               height.cm = FALSE, subsetVars=TRUE){
-  provNum = as.numeric(prov)
-  treeDataIFN2<-read.dbf(paste(DBFdir,"/",prov[1],"/PIESMA",prov[1],".DBF",sep=""))
-  cat(paste(prov[1],".",sep=""))
-  treeDataIFN2$PROVINCIA = provNum[1]
-  if(length(prov)>1){
-    for(i in 2:length(prov)){
-      cat(paste(prov[i],".",sep=""))
-      td<-read.dbf(paste(DBFdir,"/",prov[i],"/PIESMA",prov[i],".DBF",sep=""))
-      td$PROVINCIA = provNum[i]
-      treeDataIFN2 = merge(treeDataIFN2, td, all=TRUE, sort=FALSE)
-    }
+  df_list <- vector("list", length(prov))
+  for(i in 1:length(prov)){
+    td<-read.dbf(paste(DBFdir,"/",prov[i],"/PIESMA",prov[i],".DBF",sep=""))
+    td$PROVINCIA = prov[i]
+    df_list[[i]] <- as_tibble(td)
   }
-  treeDataIFN2$ID<-as.character(treeDataIFN2$PROVINCIA*10000+as.numeric(as.character(treeDataIFN2$ESTADILLO)))
+  treeDataIFN2<-bind_rows(df_list)
+
+  treeDataIFN2$ID<- as.character(as.numeric(treeDataIFN2$PROVINCIA)*10000+as.numeric(treeDataIFN2$ESTADILLO))
+
   #Selection
-  sel = rep(TRUE, nrow(treeDataIFN2))
-  if(!is.null(plotIDs)) sel = sel & (treeDataIFN2$ID %in% as.character(plotIDs))
+  sel<-rep(TRUE, nrow(treeDataIFN2))
+  if(!is.null(plotIDs)) sel <- sel & (treeDataIFN2$ID %in% as.character(plotIDs))
   treeDataIFN2 <-treeDataIFN2[sel,]
 
 
@@ -138,18 +126,16 @@ readPiesMayoresIFN2<-function(prov, DBFdir = "DBF", plotIDs = NULL,
 
 #' @rdname readIFN2
 readPCParcelaIFN2<-function(prov, DBFdir = "DBF", plotIDs = NULL){
-  pd<-read.dbf(paste(DBFdir,"/",prov[1],"/DATEST",prov[1],".DBF",sep=""))
-  cat(paste(prov[1],".",sep=""))
-  if(length(prov)>1) for(i in 2:length(prov)) {
-    pd<-merge(pd,read.dbf(paste(DBFdir,"/",prov[i],"/DATEST",prov[i],".DBF",sep="")), all=TRUE, sort=FALSE)
-    cat(paste(prov[i],".",sep=""))
-  }
-  pd$ID<-as.character(as.numeric(as.character(pd$PROVINCIA))*10000+as.numeric(as.character(pd$ESTADILLO)))
-  if(!is.null(plotIDs)) {
-    sel = (pd$ID %in% as.character(plotIDs))
-    pd <-pd[sel,]
-  }
 
-  if(length(pd$ID)==length(unique(pd$ID))) rownames(pd)<-pd$ID
-  return(pd)
+  df_list <- vector("list", length(prov))
+  for(i in 1:length(prov)) {
+    pd <- read.dbf(paste(DBFdir,"/",prov[1],"/DATEST",prov[1],".DBF",sep=""))
+    pd$ID <- as.character(as.numeric(as.character(pd$PROVINCIA))*10000+as.numeric(as.character(pd$ESTADILLO)))
+    if(!is.null(plotIDs)) {
+      sel <- (pd$ID %in% as.character(plotIDs))
+      pd <-pd[sel, , drop=FALSE]
+    }
+    df_list[[i]] <- as_tibble(pd)
+  }
+  return(bind_rows(df_list))
 }
