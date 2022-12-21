@@ -1,7 +1,8 @@
-export("readPCParcelaIFN2", "readPCParcela", "readPiesMayoresIFN2",
-       "readPiesMayoresIFN3", "readPiesMayoresIFN4", "readPiesMenoresIFN2")
+export("readPCParcelaIFN2", "readPCParcela",
+       "readPiesMayoresIFN2", "readPiesMenoresIFN2",
+       "readPiesMayores")
 export("extractRegTreeData")
-export("readMatorral", "readMatorralIFN2", "readDatosMapIFN3", "readRegenera")
+export("readMatorral", "readMatorralIFN2", "readDatosMap", "readRegenera")
 importFrom("foreign", "read.dbf")
 importFrom("utils", "setTxtProgressBar", "txtProgressBar")
 importFrom("tibble", "as_tibble")
