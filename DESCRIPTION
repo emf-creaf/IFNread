@@ -1,8 +1,8 @@
 Package: IFNread
 Type: Package
 Title: Read IFN Forest Plot Data 
-Version: 0.1.2
-Date: 2020-10-11
+Version: 0.2.0
+Date: 2022-12-21
 Authors@R: c(
 	person('Miquel', 'De Caceres', role=c('aut','cre'),
 	email='miquelcaceres@gmail.com'))
