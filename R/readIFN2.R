@@ -132,10 +132,6 @@ readPCParcelaIFN2<-function(prov, DBFdir = "DBF", renameVars = TRUE){
   for(i in 1:length(prov)) {
     pd <- read.dbf(paste(DBFdir,"/",prov[1],"/DATEST",prov[1],".DBF",sep=""))
     pd$ID <- as.character(as.numeric(as.character(pd$PROVINCIA))*10000+as.numeric(as.character(pd$ESTADILLO)))
-    if(!is.null(plotIDs)) {
-      sel <- (pd$ID %in% as.character(plotIDs))
-      pd <-pd[sel, , drop=FALSE]
-    }
     df_list[[i]] <- as_tibble(pd)
   }
   return(bind_rows(df_list))
