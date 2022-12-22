@@ -44,22 +44,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">readPiesMenoresIFN2</span><span class="op">(</span><span class="va">prov</span>, DBFdir <span class="op">=</span> <span class="st">"DBF"</span>, subsetVars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">readPiesMenoresIFN2</span><span class="op">(</span><span class="va">prov</span>, DBFdir <span class="op">=</span> <span class="st">"DBF"</span>, renameVars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">readMatorralIFN2</span><span class="op">(</span><span class="va">prov</span>, DBFdir <span class="op">=</span> <span class="st">"DBF"</span>, height.cm <span class="op">=</span> <span class="cn">FALSE</span>, subsetVars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">readMatorralIFN2</span><span class="op">(</span><span class="va">prov</span>, DBFdir <span class="op">=</span> <span class="st">"DBF"</span>, renameVars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">readPiesMayoresIFN2</span><span class="op">(</span></span>
-<span>  <span class="va">prov</span>,</span>
-<span>  DBFdir <span class="op">=</span> <span class="st">"DBF"</span>,</span>
-<span>  plotIDs <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  rem.nodensity <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  rem.nospecies <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  rem.noheight <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  height.cm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  subsetVars <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
+<span><span class="fu">readPiesMayoresIFN2</span><span class="op">(</span><span class="va">prov</span>, DBFdir <span class="op">=</span> <span class="st">"DBF"</span>, renameVars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">readPCParcelaIFN2</span><span class="op">(</span><span class="va">prov</span>, DBFdir <span class="op">=</span> <span class="st">"DBF"</span>, plotIDs <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">readPCParcelaIFN2</span><span class="op">(</span><span class="va">prov</span>, DBFdir <span class="op">=</span> <span class="st">"DBF"</span>, renameVars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,28 +63,8 @@
 <dd><p>String with the path where provinces are stored</p></dd>
 
 
-<dt>subsetVars</dt>
-<dd><p>Flag to filter data columns</p></dd>
-
-
-<dt>height.cm</dt>
-<dd><p>Flag to return height in 'cm' instead of 'meters'</p></dd>
-
-
-<dt>plotIDs</dt>
-<dd><p>String vector with a selection of plots</p></dd>
-
-
-<dt>rem.nodensity</dt>
-<dd><p>Flag to remove records without density</p></dd>
-
-
-<dt>rem.nospecies</dt>
-<dd><p>Flag to remove records without species identity</p></dd>
-
-
-<dt>rem.noheight</dt>
-<dd><p>Flag to remove records without tree height</p></dd>
+<dt>renameVars</dt>
+<dd><p>Flag to rename data columns to make them similar to IFN3/IFN4</p></dd>
 
 </dl></div>
     <div id="value">
