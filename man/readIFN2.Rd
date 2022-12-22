@@ -8,39 +8,20 @@
 \alias{readPCParcelaIFN2}
 \title{Functions to read IFN2 data}
 \usage{
-readPiesMenoresIFN2(prov, DBFdir = "DBF", subsetVars = TRUE)
+readPiesMenoresIFN2(prov, DBFdir = "DBF", renameVars = TRUE)
 
-readMatorralIFN2(prov, DBFdir = "DBF", height.cm = FALSE, subsetVars = TRUE)
+readMatorralIFN2(prov, DBFdir = "DBF", renameVars = TRUE)
 
-readPiesMayoresIFN2(
-  prov,
-  DBFdir = "DBF",
-  plotIDs = NULL,
-  rem.nodensity = FALSE,
-  rem.nospecies = FALSE,
-  rem.noheight = FALSE,
-  height.cm = FALSE,
-  subsetVars = TRUE
-)
+readPiesMayoresIFN2(prov, DBFdir = "DBF", renameVars = TRUE)
 
-readPCParcelaIFN2(prov, DBFdir = "DBF", plotIDs = NULL)
+readPCParcelaIFN2(prov, DBFdir = "DBF", renameVars = TRUE)
 }
 \arguments{
 \item{prov}{Character vector with codes of provinces (e.g. \code{c("01","03")}).}
 
 \item{DBFdir}{String with the path where provinces are stored}
 
-\item{subsetVars}{Flag to filter data columns}
-
-\item{height.cm}{Flag to return height in 'cm' instead of 'meters'}
-
-\item{plotIDs}{String vector with a selection of plots}
-
-\item{rem.nodensity}{Flag to remove records without density}
-
-\item{rem.nospecies}{Flag to remove records without species identity}
-
-\item{rem.noheight}{Flag to remove records without tree height}
+\item{renameVars}{Flag to rename data columns to make them similar to IFN3/IFN4}
 }
 \value{
 a data frame

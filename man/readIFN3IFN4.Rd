@@ -68,23 +68,6 @@ muestreada en el IFN2 e incorporaci?n de una nueva masa forestal). Se utilizar?n
   }
 }
 }}
-
-\item{include.IFN2}{Flag to include diameter and height measured in IFN2}
-
-\item{rem.codes32}{set of tree codes in IFN2 corresponding to records to be removed:
-\itemize{
-  \item{'0' or '000' - Tree not tallied in IFN2 because of its small size.}
-  \item{'999' - Tree that should have been tallied in IFN2 but was not.}
-}}
-
-\item{rem.codes33}{set of tree codes in IFN3 corresponding to records to be removed
-\itemize{
-  \item{'000' - Tree tallied in IFN2 but cut between the two inventories.}
-  \item{'444' - Tree tallied in IFN2 and the stump is not found or it is in advanced decomposition state.}
-  \item{'777' - Cork oak tree tallied in IFN2 and scorched between the two inventories.}
-  \item{'888' - Tree tallied in IFN2 and dead between the two inventories.}
-  \item{'999' - Tree tallied in IFN2 but should have not been included.}
-}}
 }
 \value{
 a data frame with IFN data, depending on the function
