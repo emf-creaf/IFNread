@@ -33,7 +33,7 @@
   x[nchar(x)==4] <- paste0("0",x[nchar(x)==4])
   return(x)
 }
-.readIFN2Tables<-function(prov, DBHdir, tablename = "PIESME") {
+.readIFN2Tables<-function(prov, DBFdir, tablename = "PIESME") {
   df_list <- vector("list", length(prov))
   for(i in 1:length(prov)){
     td<-read.dbf(paste0(DBFdir,"/",prov[i],"/",tablename,prov[i],".DBF"))

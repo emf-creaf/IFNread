@@ -12,7 +12,7 @@
 #' @name readIFN2
 readPiesMenoresIFN2<-function(prov, DBFdir = "DBF",renameVars=TRUE){
   #Read data
-  df <- .readIFN2Tables(prov, DBHdir, "PIESME")
+  df <- .readIFN2Tables(prov, DBFdir, "PIESME")
 
   df$ESPECIE <- .checkSpecies(df$ESPECIE)
 
@@ -35,7 +35,7 @@ readPiesMenoresIFN2<-function(prov, DBFdir = "DBF",renameVars=TRUE){
 #' @rdname readIFN2
 readMatorralIFN2<-function(prov, DBFdir = "DBF", renameVars = TRUE){
   #Read data
-  df <- .readIFN2Tables(prov, DBHdir, "MATORR")
+  df <- .readIFN2Tables(prov, DBFdir, "MATORR")
 
   #Check variable types
   df$ESPECIE <- .checkSpecies(df$ESPECIE)
@@ -62,7 +62,7 @@ readMatorralIFN2<-function(prov, DBFdir = "DBF", renameVars = TRUE){
 readPiesMayoresIFN2<-function(prov, DBFdir = "DBF", renameVars=TRUE){
 
   #Read data
-  df <- .readIFN2Tables(prov, DBHdir, "PIESMA")
+  df <- .readIFN2Tables(prov, DBFdir, "PIESMA")
 
   df$ESPECIE <- .checkSpecies(df$ESPECIE)
 
@@ -104,7 +104,7 @@ readPiesMayoresIFN2<-function(prov, DBFdir = "DBF", renameVars=TRUE){
 readPCParcelaIFN2<-function(prov, DBFdir = "DBF", renameVars = TRUE){
 
   #Read data
-  df <- .readIFN2Tables(prov, DBHdir, "DATEST")
+  df <- .readIFN2Tables(prov, DBFdir, "DATEST")
 
   return(df)
 }
