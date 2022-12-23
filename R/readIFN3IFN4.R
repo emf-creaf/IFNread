@@ -91,10 +91,13 @@ readDatosMap<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
                    colClasses = colClasses,
                    na.strings = c("", " ", "  ","NA"))
 
-    names(pd)[names(pd)=="Cla"] <- "Clase"
 
+    names(pd)[names(pd)=="Cla"] <- "Clase"
     #Check Estadillo
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+    pd$Clase <- .checkClase(pd$Clase)
+    pd$Subclase <- .checkSubclase(pd$Subclase)
+    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
     # Province
     if(isProv[i]) {
@@ -102,8 +105,6 @@ readDatosMap<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     }
     pd$Provincia[nchar(pd$Provincia)==1] <- paste0("0", pd$Provincia[nchar(pd$Provincia)==1])
 
-    # Correct A1 for missing Subclase
-    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
     # Plot selection
     if(!is.null(plotType)) {
@@ -158,8 +159,12 @@ readMatorral<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
                    colClasses = colClasses,
                    na.strings = c("", " ","NA"))
 
+    names(pd)[names(pd)=="Cla"] <- "Clase"
     #Check Estadillo
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+    pd$Clase <- .checkClase(pd$Clase)
+    pd$Subclase <- .checkSubclase(pd$Subclase)
+    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
     # Province
     if(isProv[i]) {
@@ -175,14 +180,14 @@ readMatorral<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     if(!is.null(plotType)) {
       sc <- pd$Subclase
       sc[is.na(sc)]<-""
-      pdtype <- paste(pd$Cla,sc, sep="")
+      pdtype <- paste(pd$Clase,sc, sep="")
       sel <- pdtype %in% plotType
       pd <- pd[sel,,drop = FALSE]
     }
 
     # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Cla, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Cla", "Subclase", "ID")
+    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }
@@ -195,6 +200,7 @@ readRegenera<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
   colClasses <- c("Estadillo" = "character",
                   "Especie" = "character",
                   "Cla" = "character",
+                  "Clase" = "character",
                   "Subclase" = "character",
                   "CatDes" = "character",
                   "Tipo" = "character",
@@ -228,8 +234,12 @@ readRegenera<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
                    na.strings = c("", " ","NA"))
 
 
+    names(pd)[names(pd)=="Cla"] <- "Clase"
     #Check Estadillo
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+    pd$Clase <- .checkClase(pd$Clase)
+    pd$Subclase <- .checkSubclase(pd$Subclase)
+    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
     # Province
     if(isProv[i]) {
@@ -244,14 +254,14 @@ readRegenera<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     if(!is.null(plotType)) {
       sc <- pd$Subclase
       sc[is.na(sc)]<-""
-      pdtype <- paste(pd$Cla,sc, sep="")
+      pdtype <- paste(pd$Clase,sc, sep="")
       sel <- pdtype %in% plotType
       pd <- pd[sel,,drop = FALSE]
     }
 
     # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Cla, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Cla", "Subclase", "ID")
+    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }
@@ -263,6 +273,7 @@ readPiesMayores<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
                           plotType = NULL){
   colClasses3 <- c("Estadillo" = "character",
                    "Cla" = "character",
+                   "Clase" = "character",
                    "Subclase" = "character",
                    "nArbol" = "numeric",
                    "OrdenIf3" = "character",
@@ -283,6 +294,7 @@ readPiesMayores<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
 
   colClasses4 <- c("Estadillo" = "character",
                    "Cla" = "character",
+                   "Clase" = "character",
                    "Subclase" = "character",
                    "nArbol" = "numeric",
                    "OrdenIf4" = "character",
@@ -329,8 +341,12 @@ readPiesMayores<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
                    na.strings = c("", " ","NA"))
 
 
+    names(pd)[names(pd)=="Cla"] <- "Clase"
     #Check Estadillo
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+    pd$Clase <- .checkClase(pd$Clase)
+    pd$Subclase <- .checkSubclase(pd$Subclase)
+    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
 
     # Province
@@ -352,14 +368,14 @@ readPiesMayores<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     if(!is.null(plotType)) {
       sc <- pd$Subclase
       sc[is.na(sc)]<-""
-      pdtype <- paste(pd$Cla,sc, sep="")
+      pdtype <- paste(pd$Clase,sc, sep="")
       sel <- pdtype %in% plotType
       pd <- pd[sel,,drop = FALSE]
     }
 
     # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Cla, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Cla", "Subclase", "ID")
+    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }
@@ -373,6 +389,7 @@ readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
   colClasses3 <- c("Provincia" = "character",
                    "Estadillo" = "character",
                    "Cla" = "character",
+                   "Clase" = "character",
                    "Subclase" = "character",
                    "Tipo" = "character",
                    "Vuelo1" = "character",
@@ -516,22 +533,26 @@ readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     if("CoorX" %in% names(pd)) pd$CoorX  <- as.numeric(pd$CoorX)
     if("CoorY" %in% names(pd)) pd$CoorY  <- as.numeric(pd$CoorY)
 
+    names(pd)[names(pd)=="Cla"] <- "Clase"
     #Check Estadillo
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+    pd$Clase <- .checkClase(pd$Clase)
+    pd$Subclase <- .checkSubclase(pd$Subclase)
+    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
 
     # Plot selection
     if(!is.null(plotType)) {
       sc <- pd$Subclase
       sc[is.na(sc)]<-""
-      pdtype <- paste(pd$Cla,sc, sep="")
+      pdtype <- paste(pd$Clase,sc, sep="")
       sel <- pdtype %in% plotType
       pd <- pd[sel,,drop = FALSE]
     }
 
     # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Cla, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Cla", "Subclase", "ID")
+    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }

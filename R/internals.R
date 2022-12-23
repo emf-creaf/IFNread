@@ -33,6 +33,12 @@
   x[nchar(x)==4] <- paste0("0",x[nchar(x)==4])
   return(x)
 }
+.checkClase<-function(x){
+  return(trimws(as.character(x)))
+}
+.checkSubclase<-function(x){
+  return(trimws(as.character(x)))
+}
 .readIFN2Tables<-function(prov, DBFdir, tablename = "PIESME") {
   df_list <- vector("list", length(prov))
   for(i in 1:length(prov)){

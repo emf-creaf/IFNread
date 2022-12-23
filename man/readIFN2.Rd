@@ -8,20 +8,20 @@
 \alias{readPCParcelaIFN2}
 \title{Functions to read IFN2 data}
 \usage{
-readPiesMenoresIFN2(prov, DBFdir = "DBF", renameVars = TRUE)
+readPiesMenoresIFN2(prov, source_path = "DBF", rename_vars = TRUE)
 
-readMatorralIFN2(prov, DBFdir = "DBF", renameVars = TRUE)
+readMatorralIFN2(prov, source_path = "DBF", rename_vars = TRUE)
 
-readPiesMayoresIFN2(prov, DBFdir = "DBF", renameVars = TRUE)
+readPiesMayoresIFN2(prov, source_path = "DBF", rename_vars = TRUE)
 
-readPCParcelaIFN2(prov, DBFdir = "DBF", renameVars = TRUE)
+readPCParcelaIFN2(prov, source_path = "DBF", rename_vars = TRUE)
 }
 \arguments{
 \item{prov}{Character vector with codes of provinces (e.g. \code{c("01","03")}).}
 
-\item{DBFdir}{String with the path where provinces are stored}
+\item{source_path}{String with the path where provinces are stored}
 
-\item{renameVars}{Flag to rename data columns to make them similar to IFN3/IFN4}
+\item{rename_vars}{Flag to rename data columns to make them similar to IFN3/IFN4}
 }
 \value{
 a data frame

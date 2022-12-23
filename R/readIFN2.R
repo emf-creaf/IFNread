@@ -5,14 +5,14 @@
 #'
 #'
 #' @param prov Character vector with codes of provinces (e.g. \code{c("01","03")}).
-#' @param DBFdir String with the path where provinces are stored
-#' @param renameVars Flag to rename data columns to make them similar to IFN3/IFN4
+#' @param source_path String with the path where provinces are stored
+#' @param rename_vars Flag to rename data columns to make them similar to IFN3/IFN4
 #'
 #' @return a data frame
 #' @name readIFN2
-readPiesMenoresIFN2<-function(prov, DBFdir = "DBF",renameVars=TRUE){
+readPiesMenoresIFN2<-function(prov, source_path = "DBF",rename_vars=TRUE){
   #Read data
-  df <- .readIFN2Tables(prov, DBFdir, "PIESME")
+  df <- .readIFN2Tables(prov, source_path, "PIESME")
 
   df$ESPECIE <- .checkSpecies(df$ESPECIE)
 
@@ -23,7 +23,7 @@ readPiesMenoresIFN2<-function(prov, DBFdir = "DBF",renameVars=TRUE){
   df$ALTUMED <- as.numeric(df$ALTUMED)
 
   ### SPECIFY SELECTION CRITERIA #####
-  if(renameVars){
+  if(rename_vars){
     n <- names(df)
     df <- df[,c(which(n=="PROVINCIA"),which(n=="ESTADILLO"),which(n=="ID"),which(n=="ESPECIE"),
                 which(n=="NUMERO"), which(n=="ALTUMED"))]
@@ -33,9 +33,9 @@ readPiesMenoresIFN2<-function(prov, DBFdir = "DBF",renameVars=TRUE){
 }
 
 #' @rdname readIFN2
-readMatorralIFN2<-function(prov, DBFdir = "DBF", renameVars = TRUE){
+readMatorralIFN2<-function(prov, source_path = "DBF", rename_vars = TRUE){
   #Read data
-  df <- .readIFN2Tables(prov, DBFdir, "MATORR")
+  df <- .readIFN2Tables(prov, source_path, "MATORR")
 
   #Check variable types
   df$ESPECIE <- .checkSpecies(df$ESPECIE)
@@ -48,7 +48,7 @@ readMatorralIFN2<-function(prov, DBFdir = "DBF", renameVars = TRUE){
   df$FRACCAB[df$FRACCAB=="NA"]<-NA
   df$FRACCAB <- as.numeric(df$FRACCAB)
 
-  if(renameVars) {
+  if(rename_vars) {
     n <- names(df)
     df <- df[,c(which(n=="PROVINCIA"),which(n=="ESTADILLO"),which(n=="ID"),
                                       which(n=="ESPECIE"),which(n=="FRACCAB"), which(n=="ALTUMED"))]
@@ -59,10 +59,10 @@ readMatorralIFN2<-function(prov, DBFdir = "DBF", renameVars = TRUE){
 }
 
 #' @rdname readIFN2
-readPiesMayoresIFN2<-function(prov, DBFdir = "DBF", renameVars=TRUE){
+readPiesMayoresIFN2<-function(prov, source_path = "DBF", rename_vars=TRUE){
 
   #Read data
-  df <- .readIFN2Tables(prov, DBFdir, "PIESMA")
+  df <- .readIFN2Tables(prov, source_path, "PIESMA")
 
   df$ESPECIE <- .checkSpecies(df$ESPECIE)
 
@@ -86,7 +86,7 @@ readPiesMayoresIFN2<-function(prov, DBFdir = "DBF", renameVars=TRUE){
   df$DIAMETRO2[df$DIAMETRO2=="NA"]<-NA
   df$DIAMETRO2 <- as.numeric(df$DIAMETRO2)
 
-  if(renameVars){
+  if(rename_vars){
     n <- names(df)
     df <- df[,c(which(n=="PROVINCIA"),which(n=="ESTADILLO"),which(n=="ID"),
                                     which(n=="NUMORDEN"),
@@ -101,10 +101,10 @@ readPiesMayoresIFN2<-function(prov, DBFdir = "DBF", renameVars=TRUE){
 }
 
 #' @rdname readIFN2
-readPCParcelaIFN2<-function(prov, DBFdir = "DBF", renameVars = TRUE){
+readPCParcelaIFN2<-function(prov, source_path = "DBF", rename_vars = TRUE){
 
   #Read data
-  df <- .readIFN2Tables(prov, DBFdir, "DATEST")
+  df <- .readIFN2Tables(prov, source_path, "DATEST")
 
   return(df)
 }
