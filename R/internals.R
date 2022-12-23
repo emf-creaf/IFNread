@@ -18,3 +18,35 @@
   FACTOREXP[which(d>=42.5)] = 4
   return(factor[FACTOREXP])
 }
+.checkSpecies <- function(x) {
+  x <- as.character(x)
+  x[nchar(x)==1 & !is.na(x)] <- paste0("000",x[nchar(x)==1 & !is.na(x)])
+  x[nchar(x)==2 & !is.na(x)] <- paste0("00",x[nchar(x)==2 & !is.na(x)])
+  x[nchar(x)==3 & !is.na(x)] <- paste0("0",x[nchar(x)==3 & !is.na(x)])
+  return(x)
+}
+.checkEstadillo <- function(x) {
+  x <- as.character(x)
+  x[nchar(x)==1] <- paste0("0000",x[nchar(x)==1])
+  x[nchar(x)==2] <- paste0("000",x[nchar(x)==2])
+  x[nchar(x)==3] <- paste0("00",x[nchar(x)==3])
+  x[nchar(x)==4] <- paste0("0",x[nchar(x)==4])
+  return(x)
+}
+.readIFN2Tables<-function(prov, DBHdir, tablename = "PIESME") {
+  df_list <- vector("list", length(prov))
+  for(i in 1:length(prov)){
+    td<-read.dbf(paste0(DBFdir,"/",prov[i],"/",tablename,prov[i],".DBF"))
+    td$PROVINCIA <- prov[i]
+    df_list[[i]] <- as_tibble(td)
+  }
+  df<-bind_rows(df_list)
+
+  #Check Estadillo
+  df$ESTADILLO <- .checkEstadillo(df$ESTADILLO)
+
+  #Define ID
+  df$ID<-paste0(df$PROVINCIA,df$ESTADILLO)
+
+  return(df)
+}

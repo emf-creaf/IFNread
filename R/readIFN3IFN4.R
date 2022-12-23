@@ -93,6 +93,9 @@ readDatosMap<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
 
     names(pd)[names(pd)=="Cla"] <- "Clase"
 
+    #Check Estadillo
+    pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+
     # Province
     if(isProv[i]) {
       if(!("Provincia" %in% names(pd))) pd$Provincia <- prov[i]
@@ -155,11 +158,19 @@ readMatorral<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
                    colClasses = colClasses,
                    na.strings = c("", " ","NA"))
 
+    #Check Estadillo
+    pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+
     # Province
     if(isProv[i]) {
       if(!("Provincia" %in% names(pd))) pd$Provincia <- prov[i]
     }
     pd$Provincia[nchar(pd$Provincia)==1] <- paste0("0", pd$Provincia[nchar(pd$Provincia)==1])
+
+
+    # Species names
+    pd$Especie <- .checkSpecies(pd$Especie)
+
     # Plot selection
     if(!is.null(plotType)) {
       sc <- pd$Subclase
@@ -216,11 +227,19 @@ readRegenera<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
                    colClasses = colClasses,
                    na.strings = c("", " ","NA"))
 
+
+    #Check Estadillo
+    pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+
     # Province
     if(isProv[i]) {
       if(!("Provincia" %in% names(pd))) pd$Provincia <- prov[i]
     }
     pd$Provincia[nchar(pd$Provincia)==1] <- paste0("0", pd$Provincia[nchar(pd$Provincia)==1])
+
+    # Species names
+    pd$Especie <- .checkSpecies(pd$Especie)
+
     # Plot selection
     if(!is.null(plotType)) {
       sc <- pd$Subclase
@@ -309,17 +328,26 @@ readPiesMayores<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
                    colClasses = colClasses,
                    na.strings = c("", " ","NA"))
 
-    pd$Rumbo <- as.numeric(pd$Rumbo)
-    pd$Distanci <- as.numeric(pd$Distanci)
-    pd$Dn1 <- as.numeric(pd$Dn1)
-    pd$Dn2 <- as.numeric(pd$Dn2)
-    pd$Ht <- as.numeric(pd$Ht)
+
+    #Check Estadillo
+    pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+
 
     # Province
     if(isProv[i]) {
       if(!("Provincia" %in% names(pd))) pd$Provincia <- prov[i]
     }
     pd$Provincia[nchar(pd$Provincia)==1] <- paste0("0", pd$Provincia[nchar(pd$Provincia)==1])
+
+    # Species names
+    pd$Especie <- .checkSpecies(pd$Especie)
+
+    pd$Rumbo <- as.numeric(pd$Rumbo)
+    pd$Distanci <- as.numeric(pd$Distanci)
+    pd$Dn1 <- as.numeric(pd$Dn1)
+    pd$Dn2 <- as.numeric(pd$Dn2)
+    pd$Ht <- as.numeric(pd$Ht)
+
     # Plot selection
     if(!is.null(plotType)) {
       sc <- pd$Subclase
@@ -487,6 +515,10 @@ readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     names(pd)[names(pd)=="Coory"]  <- "CoorY"
     if("CoorX" %in% names(pd)) pd$CoorX  <- as.numeric(pd$CoorX)
     if("CoorY" %in% names(pd)) pd$CoorY  <- as.numeric(pd$CoorY)
+
+    #Check Estadillo
+    pd$Estadillo <- .checkEstadillo(pd$Estadillo)
+
 
     # Plot selection
     if(!is.null(plotType)) {
