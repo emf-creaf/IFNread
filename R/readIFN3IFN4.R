@@ -115,11 +115,9 @@ readDatosMap<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     }
 
     # Add IDs and order variables
-    pd <- mutate(pd,
-                 IDPARCELA = paste0(Provincia, Estadillo),
-                 IDCLASE = paste0(Clase, Subclase),
-                 ID = paste0(IDPARCELA,"_", IDCLASE)
-    )
+    pd$IDPARCELA <- paste0(pd$Provincia, pd$Estadillo)
+    pd$IDCLASE <- paste0(pd$Clase, pd$Subclase)
+    pd$ID = paste0(pd$IDPARCELA,"_", pd$IDCLASE)
     vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
@@ -188,11 +186,9 @@ readMatorral<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     }
 
     # Add IDs and order variables
-    pd <- mutate(pd,
-                 IDPARCELA = paste0(Provincia, Estadillo),
-                 IDCLASE = paste0(Clase, Subclase),
-                 ID = paste0(IDPARCELA,"_", IDCLASE)
-    )
+    pd$IDPARCELA <- paste0(pd$Provincia, pd$Estadillo)
+    pd$IDCLASE <- paste0(pd$Clase, pd$Subclase)
+    pd$ID = paste0(pd$IDPARCELA,"_", pd$IDCLASE)
     vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
@@ -265,11 +261,9 @@ readRegenera<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     }
 
     # Add IDs and order variables
-    pd <- mutate(pd,
-                 IDPARCELA = paste0(Provincia, Estadillo),
-                 IDCLASE = paste0(Clase, Subclase),
-                 ID = paste0(IDPARCELA,"_", IDCLASE)
-    )
+    pd$IDPARCELA <- paste0(pd$Provincia, pd$Estadillo)
+    pd$IDCLASE <- paste0(pd$Clase, pd$Subclase)
+    pd$ID = paste0(pd$IDPARCELA,"_", pd$IDCLASE)
     vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
@@ -382,11 +376,9 @@ readPiesMayores<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     }
 
     # Add IDs and order variables
-    pd <- mutate(pd,
-                 IDPARCELA = paste0(Provincia, Estadillo),
-                 IDCLASE = paste0(Clase, Subclase),
-                 ID = paste0(IDPARCELA,"_", IDCLASE)
-    )
+    pd$IDPARCELA <- paste0(pd$Provincia, pd$Estadillo)
+    pd$IDCLASE <- paste0(pd$Clase, pd$Subclase)
+    pd$ID = paste0(pd$IDPARCELA,"_", pd$IDCLASE)
     vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
@@ -562,11 +554,9 @@ readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     }
 
     # Add IDs and order variables
-    pd <- mutate(pd,
-      IDPARCELA = paste0(Provincia, Estadillo),
-      IDCLASE = paste0(Clase, Subclase),
-      ID = paste0(IDPARCELA,"_", IDCLASE)
-    )
+    pd$IDPARCELA <- paste0(pd$Provincia, pd$Estadillo)
+    pd$IDCLASE <- paste0(pd$Clase, pd$Subclase)
+    pd$ID = paste0(pd$IDPARCELA,"_", pd$IDCLASE)
     vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
