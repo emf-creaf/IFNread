@@ -27,16 +27,17 @@
 }
 .checkEstadillo <- function(x) {
   x <- as.character(x)
-  x[nchar(x)==1] <- paste0("0000",x[nchar(x)==1])
-  x[nchar(x)==2] <- paste0("000",x[nchar(x)==2])
-  x[nchar(x)==3] <- paste0("00",x[nchar(x)==3])
-  x[nchar(x)==4] <- paste0("0",x[nchar(x)==4])
+  x[nchar(x)==1] <- paste0("000",x[nchar(x)==1])
+  x[nchar(x)==2] <- paste0("00",x[nchar(x)==2])
+  x[nchar(x)==3] <- paste0("0",x[nchar(x)==3])
   return(x)
 }
 .checkClase<-function(x){
+  x[is.na(x)] <- ""
   return(trimws(as.character(x)))
 }
 .checkSubclase<-function(x){
+  x[is.na(x)] <- ""
   return(trimws(as.character(x)))
 }
 .readIFN2Tables<-function(prov, DBFdir, tablename = "PIESME") {

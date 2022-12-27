@@ -97,7 +97,6 @@ readDatosMap<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
     pd$Clase <- .checkClase(pd$Clase)
     pd$Subclase <- .checkSubclase(pd$Subclase)
-    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
     # Province
     if(isProv[i]) {
@@ -115,9 +114,13 @@ readDatosMap<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
       pd <- pd[sel,,drop = FALSE]
     }
 
-    # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
+    # Add IDs and order variables
+    pd <- mutate(pd,
+                 IDPARCELA = paste0(Provincia, Estadillo),
+                 IDCLASE = paste0(Clase, Subclase),
+                 ID = paste0(IDPARCELA,"_", IDCLASE)
+    )
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }
@@ -164,7 +167,6 @@ readMatorral<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
     pd$Clase <- .checkClase(pd$Clase)
     pd$Subclase <- .checkSubclase(pd$Subclase)
-    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
     # Province
     if(isProv[i]) {
@@ -185,9 +187,13 @@ readMatorral<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
       pd <- pd[sel,,drop = FALSE]
     }
 
-    # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
+    # Add IDs and order variables
+    pd <- mutate(pd,
+                 IDPARCELA = paste0(Provincia, Estadillo),
+                 IDCLASE = paste0(Clase, Subclase),
+                 ID = paste0(IDPARCELA,"_", IDCLASE)
+    )
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }
@@ -239,7 +245,6 @@ readRegenera<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
     pd$Clase <- .checkClase(pd$Clase)
     pd$Subclase <- .checkSubclase(pd$Subclase)
-    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
     # Province
     if(isProv[i]) {
@@ -259,9 +264,13 @@ readRegenera<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
       pd <- pd[sel,,drop = FALSE]
     }
 
-    # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
+    # Add IDs and order variables
+    pd <- mutate(pd,
+                 IDPARCELA = paste0(Provincia, Estadillo),
+                 IDCLASE = paste0(Clase, Subclase),
+                 ID = paste0(IDPARCELA,"_", IDCLASE)
+    )
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }
@@ -346,7 +355,6 @@ readPiesMayores<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
     pd$Clase <- .checkClase(pd$Clase)
     pd$Subclase <- .checkSubclase(pd$Subclase)
-    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
 
     # Province
@@ -373,9 +381,13 @@ readPiesMayores<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
       pd <- pd[sel,,drop = FALSE]
     }
 
-    # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
+    # Add IDs and order variables
+    pd <- mutate(pd,
+                 IDPARCELA = paste0(Provincia, Estadillo),
+                 IDCLASE = paste0(Clase, Subclase),
+                 ID = paste0(IDPARCELA,"_", IDCLASE)
+    )
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }
@@ -538,7 +550,6 @@ readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
     pd$Estadillo <- .checkEstadillo(pd$Estadillo)
     pd$Clase <- .checkClase(pd$Clase)
     pd$Subclase <- .checkSubclase(pd$Subclase)
-    pd$Subclase[pd$Clase=="A" & (is.na(pd$Subclase) | (pd$Subclase==""))] <- "1"
 
 
     # Plot selection
@@ -550,9 +561,13 @@ readPCParcela<-function(source_path, ifn = 3, prov = NULL, ccaa = NULL,
       pd <- pd[sel,,drop = FALSE]
     }
 
-    # Add ID and order variables
-    pd$ID <- paste0(pd$Provincia, pd$Estadillo, "_", pd$Clase, pd$Subclase)
-    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "ID")
+    # Add IDs and order variables
+    pd <- mutate(pd,
+      IDPARCELA = paste0(Provincia, Estadillo),
+      IDCLASE = paste0(Clase, Subclase),
+      ID = paste0(IDPARCELA,"_", IDCLASE)
+    )
+    vars <- c("Provincia", "Estadillo", "Clase", "Subclase", "IDPARCELA", "IDCLASE" ,"ID")
     pd <- pd[,c(vars, names(pd)[!(names(pd) %in% vars)]), drop = FALSE]
     df_list[[i]]<- as_tibble(pd)
   }
