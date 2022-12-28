@@ -22,12 +22,16 @@ readPiesMenoresIFN2<-function(prov, source_path = "DBF",rename_vars=TRUE){
   df$ALTUMED[df$ALTUMED=="NA"]<-NA
   df$ALTUMED <- as.numeric(df$ALTUMED)
 
+  df$REGENA <- as.character(df$REGENA)
+  df$REGENA[df$REGENA=="NA"]<-NA
+  df$REGENA <- as.numeric(df$REGENA)
+
   ### SPECIFY SELECTION CRITERIA #####
   if(rename_vars){
     n <- names(df)
     df <- df[,c(which(n=="PROVINCIA"),which(n=="ESTADILLO"),which(n=="ID"),which(n=="ESPECIE"),
-                which(n=="NUMERO"), which(n=="ALTUMED"))]
-    names(df) <- c("Provincia", "Estadillo", "ID","Especie","Numero","Hm")
+                which(n=="NUMERO"), which(n=="ALTUMED"), which(n=="REGENA"))]
+    names(df) <- c("Provincia", "Estadillo", "ID","Especie","Numero","Hm", "Regena")
   }
   return(df)
 }
@@ -93,7 +97,7 @@ readPiesMayoresIFN2<-function(prov, source_path = "DBF", rename_vars=TRUE){
                                     which(n=="ESPECIE"), which(n=="DISTANCI"), which(n=="DIAMETRO1"), which(n=="DIAMETRO2"),
                                     which(n=="ALTURA"))]
     names(df)<-c("Provincia", "Estadillo","ID",
-                           "OrdenIfn2",
+                           "OrdenIf2",
                            "Especie", "Distanci", "Dn1", "Dn2",
                            "Ht")
   }
